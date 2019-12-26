@@ -1,0 +1,27 @@
+
+<div class="main-container" [class.is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <span><img src="../../assets/logo.svg"></span> 
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav class="sidenav" #snav [mode]="mobileQuery.matches ? 'push' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list>
+                <a mat-list-item> Hello </a>
+                <a mat-list-item> One</a>
+                <a mat-list-item> Two</a>
+          <!-- <a mat-list-item [ngClass]="{'activeClass' : nav.id == activeID  }" (click)="onSideNavItemClick(nav)" *ngFor="let nav of fillerNav">{{nav.displayName}}</a> -->
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+          Hello
+
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  
