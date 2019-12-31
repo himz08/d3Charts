@@ -14,6 +14,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 
+
 // Components
 
 import { AppComponent } from './app.component';
@@ -23,6 +24,9 @@ import { BarChartComponent } from './home/bar-chart/bar-chart.component';
 import { AreaChartComponent } from './home/area-chart/area-chart.component';
 import { HierarchyChartComponent } from './home/hierarchy-chart/hierarchy-chart.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { BarChartViewComponent } from './home/bar-chart/bar-chart-view/bar-chart-view.component';
+import { PieChartComponent } from './home/pie-chart/pie-chart.component';
+import { PieChartViewComponent } from './home/pie-chart/pie-chart-view/pie-chart-view.component';
 
 
 
@@ -34,7 +38,10 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     BarChartComponent,
     AreaChartComponent,
     HierarchyChartComponent,
-    LoaderComponent
+    LoaderComponent,
+    BarChartViewComponent,
+    PieChartComponent,
+    PieChartViewComponent
   ],
   imports: [
     BrowserAnimationsModule,
