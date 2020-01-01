@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 // D3 dependencies
 import * as d3 from 'd3';
@@ -6,6 +6,7 @@ import * as d3Shape from 'd3-shape';
 import * as d3Interpolate from 'd3-interpolate';
 import * as d3Scale from 'd3-scale';
 import { PiChartData } from 'src/app/shared/interfaces/interface';
+
 
 
 @Component({
@@ -16,6 +17,7 @@ import { PiChartData } from 'src/app/shared/interfaces/interface';
 export class PieChartViewComponent implements OnInit, OnChanges {
 
   @Input() data: PiChartData;
+  @Output() deleteData = new EventEmitter<string>();
   public isInputDataAvailable: boolean;
   private dims = { height: 300, width: 300, radius: 150 };
   private cent = { x: (this.dims.width / 2 + 5), y: (this.dims.height / 2 + 5) };
@@ -72,19 +74,44 @@ export class PieChartViewComponent implements OnInit, OnChanges {
       // .transition().duration(750).attrTween('d', this.arcTweenEnter);
       .transition().duration(750).attr('d', this.arcGenerator);
 
+    // add event listener
+    d3.selectAll('path')
+      .attr('class', 'eventListeners')
+      .on('mouseover', (d, i, n) => this.handleMouseOver(d, i , n))
+      .on('mouseout', (d, i , n) => this.handleMouseOut(d , i, n))
+      .on('click', (d, i , n) => this.handleClickEvent(d, i , n));
+
   }
 
-//    arcTweenEnter = (d) => {
-//     var i = d3.interpolate(d.endAngle, d.startAngle);
-//         return function(t) {
-//             d.startAngle = i(t);
-//             return this.arcGenerator(d);
-//         }
-// }
- 
+  //    arcTweenEnter = (d) => {
+  //     var i = d3.interpolate(d.endAngle, d.startAngle);
+  //         return function(t) {
+  //             d.startAngle = i(t);
+  //             return this.arcGenerator(d);
+  //         }
+  // }
+
   ngOnChanges(changes: any) {
     if (this.isInputDataAvailable === true) {
       this.update(this.data);
     }
+  }
+
+  private handleMouseOver(d, i, n) {
+    d3.select(n[i])
+    .transition('changeSliceFill').duration(300)
+      .attr('fill', 'gray')
+      .attr('transform', 'scale(1.02)');
+  }
+
+  private handleMouseOut(d, i , n) {
+    d3.select(n[i])
+    .transition('changeSliceFill').duration(300)
+      .attr('transform', 'scale(1)')
+      .attr('fill', this.colour(d.data.name));
+  }
+
+  private handleClickEvent(d, i , n) {
+    this.deleteData.emit(d.data.id);
   }
 }

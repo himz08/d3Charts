@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { PiChartData } from '../../shared/interfaces/interface'
+import { PiChartData } from '../../shared/interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,10 @@ export class PieChartService {
   }
 
   addPieChartData(data: PiChartData) {
-    return this.firestore.collection('expeneses').add(data);
+    return this.firestore.collection('expenses').add(data);
+  }
+
+  deletePieChartData(id: string) {
+    return this.firestore.collection('expenses').doc(id).delete();
   }
 }

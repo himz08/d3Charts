@@ -23,7 +23,7 @@
         </div>
         <!-- <div class="col s12 m5 push-m1"> -->
             <!-- <div class="canvas"> -->
-                <app-pie-chart-view [data]="dataForChild" *ngIf="isDataAvl"></app-pie-chart-view>
+                <app-pie-chart-view (deleteData)="handleClickEvent($event)" [data]="dataForChild" *ngIf="isDataAvl"></app-pie-chart-view>
             <!-- </div> -->
         <!-- </div> -->
     </div>

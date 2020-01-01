@@ -4,6 +4,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { PiChartData } from 'src/app/shared/interfaces/interface';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CommonService } from '../../shared/services/common.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -20,7 +21,8 @@ export class PieChartComponent implements OnInit, OnDestroy {
   public erroMessage = 'Please enter the values';
 
   constructor(private chartService: PieChartService,
-    private ngxLoader: NgxUiLoaderService
+    private ngxLoader: NgxUiLoaderService,
+    private commonService : CommonService
   ) { }
 
   ngOnInit() {
@@ -34,8 +36,9 @@ export class PieChartComponent implements OnInit, OnDestroy {
         this.checkTypeAndUpdateData(change, doc);
       });
       this.isDataAvl = true;
+      this.dataForChild = null;
       this.dataForChild = JSON.parse(JSON.stringify(this.data));
-      console.log('data for child', this.dataForChild);
+      console.log('data for child', this.data);
     });
     this.initForm();
   }
@@ -48,9 +51,10 @@ private initForm() {
 }
 
   private checkTypeAndUpdateData(change, doc) {
+    console.log('=============>>>>>', change.type);
     switch (change.type) {
       case 'added':
-        console.log(this);
+        console.log('added');
         this.data.push(doc);
         break;
 
@@ -76,13 +80,21 @@ onAddItemClick() {
   if (this.inputForm.valid) {
     this.chartService.addPieChartData({
       name: this.inputForm.controls.itemName.value,
-      cost: this.inputForm.controls.itemCost.value,
+      cost: parseInt(this.inputForm.controls.itemCost.value),
     });
     // this.erroMessage = '';
   }
   else {
     // this.erroMessage = 'Please enter the values';
   }
+}
+
+handleClickEvent(id: string) {
+  this.chartService.deletePieChartData(id).then(() => {
+    this.commonService.openSnackBar('Deleted !', 'Ok');
+  }).catch((error) => {
+    console.error('Error removing document: ', error);
+});
 }
 
   ngOnDestroy() {
