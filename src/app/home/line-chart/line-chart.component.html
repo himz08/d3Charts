@@ -1,3 +1,31 @@
 <div class="main-container">
-    <p>line-chart works!</p>
+<div class="navBar">
+    <div class="section-1">
+      <h3 class="tittle">- Line Graph -</h3>
+    </div> 
+  </div>
+    
+  <div class="section-2">
+    <div class="row">
+      <div class="col-sm-12 col-lg-5">
+        <button [ngClass]="{'activeBtn' : serverId === 1 }" (click)="onServerChange(1)"> Server One </button>
+        <button [ngClass]="{'activeBtn' : serverId === 2 }" (click)="onServerChange(2)"> Server Two </button>
+        <button [ngClass]="{'activeBtn' : serverId === 3 }" (click)="onServerChange(3)"> Server Three </button>
+        <button [ngClass]="{'activeBtn' : serverId === 4 }" (click)="onServerChange(4)"> Server Four </button>
+      </div>
+      <div class="col-sm-12 col-lg-6 canvasContainer">
+        <div class="canvas">
+            <app-line-chart-view [data]="dataForChild" *ngIf="dataForChild.length > 0"> </app-line-chart-view>
+        </div>
+      </div>
+    </div>
+
+      <div class="input-box">
+        <p class="formHeading">Add point to <span class="serverName">{{servaerName}}</span> chart</p>
+        <input [(ngModel)]='distance' type="text" id="cycling" placeholder="Distance in km" />
+        <p class="errorMessage"></p>
+        <button (click)="onAddNew()"> Add </button>
+      </div>
+
+  </div>
 </div>

@@ -11,6 +11,7 @@ import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 
 
@@ -27,7 +28,10 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { BarChartViewComponent } from './home/bar-chart/bar-chart-view/bar-chart-view.component';
 import { PieChartComponent } from './home/pie-chart/pie-chart.component';
 import { PieChartViewComponent } from './home/pie-chart/pie-chart-view/pie-chart-view.component';
-
+import { LineChartViewComponent } from './home/line-chart/line-chart-view/line-chart-view.component';
+import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
+import { HeirachyChartViewComponent } from './home/hierarchy-chart/heirachy-chart-view/heirachy-chart-view.component';
+import { DialogBoxComponent } from '../app/home/hierarchy-chart/dialog-box/dialog-box.component'
 
 
 @NgModule({
@@ -41,7 +45,11 @@ import { PieChartViewComponent } from './home/pie-chart/pie-chart-view/pie-chart
     LoaderComponent,
     BarChartViewComponent,
     PieChartComponent,
-    PieChartViewComponent
+    PieChartViewComponent,
+    LineChartViewComponent,
+    ConfirmationDialogComponent,
+    HeirachyChartViewComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -54,9 +62,12 @@ import { PieChartViewComponent } from './home/pie-chart/pie-chart-view/pie-chart
     MatSidenavModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    NgxUiLoaderModule
+    NgxUiLoaderModule,
+    HttpClientModule,
+    HttpClientJsonpModule
   ],
   providers: [],
+  entryComponents: [ConfirmationDialogComponent, DialogBoxComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

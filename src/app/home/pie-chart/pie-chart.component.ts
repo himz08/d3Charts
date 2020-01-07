@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { PieChartService } from './pie-chart.service';
+import { ChartService } from '../../shared/services/chart.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { PiChartData } from 'src/app/shared/interfaces/interface';
 import { Subscription } from 'rxjs';
@@ -20,23 +20,21 @@ export class PieChartComponent implements OnInit, OnDestroy {
   public inputForm: FormGroup;
   public erroMessage = 'Please enter the values';
 
-  constructor(private chartService: PieChartService,
-    private ngxLoader: NgxUiLoaderService,
-    private commonService : CommonService
+  constructor(private chartService: ChartService,
+              private ngxLoader: NgxUiLoaderService,
+              private commonService: CommonService
   ) { }
 
   ngOnInit() {
-    this.isDataAvl = false;
     this.ngxLoader.start();
     this.subscription = this.chartService.getPieChartData().subscribe((res: any) => {
       this.ngxLoader.stop();
       console.log(res);
+      this.data = [];
       res.forEach(change => {
         const doc = { ...change.payload.doc.data(), id: change.payload.doc.id };
         this.checkTypeAndUpdateData(change, doc);
       });
-      this.isDataAvl = true;
-      this.dataForChild = null;
       this.dataForChild = JSON.parse(JSON.stringify(this.data));
       console.log('data for child', this.data);
     });
@@ -81,6 +79,9 @@ onAddItemClick() {
     this.chartService.addPieChartData({
       name: this.inputForm.controls.itemName.value,
       cost: parseInt(this.inputForm.controls.itemCost.value),
+    }).then(() => {
+      this.commonService.openSnackBar('Added', 'ok');
+      this.initForm();
     });
     // this.erroMessage = '';
   }
@@ -89,15 +90,8 @@ onAddItemClick() {
   }
 }
 
-handleClickEvent(id: string) {
-  this.chartService.deletePieChartData(id).then(() => {
-    this.commonService.openSnackBar('Deleted !', 'Ok');
-  }).catch((error) => {
-    console.error('Error removing document: ', error);
-});
-}
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }
+

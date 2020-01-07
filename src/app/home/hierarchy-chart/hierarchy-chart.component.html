@@ -1,1 +1,14 @@
-<p>hierarchy-chart works!</p>
+
+  <div class="grey lighten-3 section grey-text" style="position: relative">
+    <p class="flow-text center">Hierarchy Chart</p>
+    <a (click)="openDialog()" class="btn-floating btn-large halfway-fab pink modal-trigger">
+      <i style="background: #06405c;" class="material-icons">add</i>
+    </a>
+  </div>
+  
+
+  
+  <div class="container">
+    <app-heirachy-chart-view [data]="dataForChild"></app-heirachy-chart-view> 
+ </div>
+

@@ -1,3 +1,27 @@
-<svg width="600" height="600">
-    
-</svg>
+<div class="navBar">
+    <div class="section-1">
+      <h3 class="tittle">- Bar Graph -</h3>
+    </div> 
+  </div>
+  <form [formGroup]='inputForm' class="card z-depth-0">
+    <div class="greeninsColor card-content">
+        <span class="card-title">Add Item:</span>
+        <div class="input-field">
+            <input formControlName='itemName' type="text" id="name">
+            <label for="name">Item Name</label>
+        </div>
+        <div class="input-field">
+            <input formControlName='itemCost' type="text" id="cost">
+            <label for="cost">Orders</label>
+        </div>
+        <div class="input-field center">
+            <button [disabled]="!inputForm.valid" (click)="onAddItemClick()" class="btn-large pink white-text">Add Item</button>
+        </div>
+        <div *ngIf="!inputForm.valid && inputForm.dirty" class="input-field center">
+            <p id="error" class="red-text">{{erroMessage}}</p>
+        </div>
+    </div>
+</form>
+<div class="d3ChartContainer">
+    <app-bar-chart-view *ngIf="dataForChild.length > 0" [data]="dataForChild"></app-bar-chart-view>
+</div>

@@ -2,9 +2,11 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
 import 'd3-transition';
 import { BarChartData } from '../../shared/interfaces/interface';
-import { BarChartService } from '../bar-chart/bar-chart.service';
+import { ChartService } from '../../shared/services/chart.service';
 import { Subscription } from 'rxjs';
 import { NgxUiLoaderService } from 'ngx-ui-loader'; // Import NgxUiLoaderService
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/shared/services/common.service';
 
 
 @Component({
@@ -21,35 +23,57 @@ export class BarChartComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
   xAxisGroup: any;
+  i = 0;
   yAxisGroup: any;
   inputText: string;
+  inputForm: FormGroup;
   inputValue: number;
-  constructor(private chartService: BarChartService,
-              private ngxLoader: NgxUiLoaderService
+  constructor(private chartService: ChartService,
+              private ngxLoader: NgxUiLoaderService,
+              private commonService: CommonService
   ) { }
 
   ngOnInit() {
+    this.initForm();
     this.ngxLoader.start();
     this.subscription = this.chartService.getBarChartData().subscribe((res: any) => {
       this.ngxLoader.stop();
-      console.log(res);
+      console.log('res-----', res);
+      // this.data = [];
+ 
       res.forEach(change => {
         const doc = { ...change.payload.doc.data(), id: change.payload.doc.id };
         this.checkTypeAndUpdateData(change, doc);
       });
       this.dataForChild = JSON.parse(JSON.stringify(this.data));
+      console.log('data for child', this.data);
+
+    });
+    this.chartService.emitPageId(2);
+
+  }
+  private initForm() {
+    this.inputForm = new FormGroup({
+      itemName: new FormControl('', [Validators.required]),
+      itemCost: new FormControl('', [Validators.required])
     });
   }
 
   private checkTypeAndUpdateData(change, doc) {
+    console.log('>>>>>>>' , this.i++ , change.type);
     switch (change.type) {
 
       case 'added':
+        console.log('added');
         this.data.push(doc);
         break;
 
       case 'modified':
         const index = this.data.findIndex(item => item.id === doc.id);
+        console.log('Modified');
+        console.log(this.data);
+        console.log(doc);
+        console.log(change, index);
         this.data[index] = doc;
         break;
 
@@ -62,16 +86,22 @@ export class BarChartComponent implements OnInit, OnDestroy {
     }
   }
 
-  onInputClick() {
-    if (this.inputText && this.inputValue) {
-      console.log(this.inputText);
-      console.log(this.inputValue);
-      this.chartService.addDataToBarChart({ Name: this.inputText, Orders: this.inputValue }).then(res => {
-        console.log('Add', res);
+  onAddItemClick() {
+    console.log(this.inputForm.controls.itemCost.valid, this.inputForm.controls.itemName.valid)
+    if (this.inputForm.valid) {
+      this.chartService.addBarChartData({
+        Name: this.inputForm.controls.itemName.value,
+        Orders: parseInt(this.inputForm.controls.itemCost.value),
+      }).then(() => {
+        this.commonService.openSnackBar('Added', 'ok');
+        this.initForm();
       });
+      // this.erroMessage = '';
+    }
+    else {
+      // this.erroMessage = 'Please enter the values';
     }
   }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

@@ -3,9 +3,13 @@ import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angu
 // D3 dependencies
 import * as d3 from 'd3';
 import * as d3Shape from 'd3-shape';
-import * as d3Interpolate from 'd3-interpolate';
+import d3Tip from 'd3-tip';
 import * as d3Scale from 'd3-scale';
 import { PiChartData } from 'src/app/shared/interfaces/interface';
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material';
+import { ChartService } from 'src/app/shared/services/chart.service';
+import { legendColor } from 'd3-svg-legend';
 
 
 
@@ -17,7 +21,6 @@ import { PiChartData } from 'src/app/shared/interfaces/interface';
 export class PieChartViewComponent implements OnInit, OnChanges {
 
   @Input() data: PiChartData;
-  @Output() deleteData = new EventEmitter<string>();
   public isInputDataAvailable: boolean;
   private dims = { height: 300, width: 300, radius: 150 };
   private cent = { x: (this.dims.width / 2 + 5), y: (this.dims.height / 2 + 5) };
@@ -25,8 +28,11 @@ export class PieChartViewComponent implements OnInit, OnChanges {
   private pie: any;
   private colour: any;
   private arcGenerator: any;
+  legendGroup: any;
+  legend: any;
+  tip: any;
 
-  constructor() { }
+  constructor(public dialog: MatDialog, private chartService: ChartService) { }
 
   ngOnInit() {
     this.initSvgAndPie();
@@ -39,11 +45,16 @@ export class PieChartViewComponent implements OnInit, OnChanges {
     this.isInputDataAvailable = true;
     console.log('------->', this.data);
     this.update(this.data);
+    this.chartService.emitPageId(3);
+
   }
 
   private initSvgAndPie() {
+    const width = this.dims.width + 150;
+    const height = this.dims.height + 150;
     this.svg = d3.select('.canvas')
       .append('svg')
+      // .attr('viewBox', `0,0,${width},${height}`)
       .attr('width', this.dims.width + 150)
       .attr('height', this.dims.height + 150)
       .append('g')
@@ -52,11 +63,29 @@ export class PieChartViewComponent implements OnInit, OnChanges {
     this.pie = d3Shape.pie()
       .sort(null)
       .value((d: any) => d.cost);
+
+    this.legendGroup = this.svg.append('g')
+      .attr('transform', `translate(${this.cent.x + 15}, -80)`);
+
+    this.legend = legendColor().shape('circle');
+    this.tip = d3Tip()
+      .attr('class', 'tip card')
+      .html(d => {
+        let content = `<div style="border-radius:8px; padding: 2px; background: white; z-index: 1000; border: solid 1px;" class="tip-container"> <div class="name">${d.data.name}</div>`;
+        content += `<div class="cost">£${d.data.cost}</div>`;
+        content += `<div class="delete">Click slice to delete</div> </div>`;
+        return content;
+      });
+    this.svg.call(this.tip);
   }
 
   private update(data) {
     // update colour scale domain
     this.colour.domain(data.map(d => d.name));
+
+    // update legend
+    this.legend.scale(this.colour);
+    this.legendGroup.call(this.legend);
     // join enhanced (pie) data to path elements
     const paths = this.svg.selectAll('path')
       .data(this.pie(data));
@@ -77,9 +106,13 @@ export class PieChartViewComponent implements OnInit, OnChanges {
     // add event listener
     d3.selectAll('path')
       .attr('class', 'eventListeners')
-      .on('mouseover', (d, i, n) => this.handleMouseOver(d, i , n))
-      .on('mouseout', (d, i , n) => this.handleMouseOut(d , i, n))
-      .on('click', (d, i , n) => this.handleClickEvent(d, i , n));
+      .on('mouseover', (d, i, n) => {
+        this.handleMouseOver(d, i, n);
+        this.tip.show(d, n[i]);
+      })
+      .on('mouseout', (d, i, n) => this.handleMouseOut(d, i, n))
+      .on('click', (d, i, n) => this.handleClickEvent(d, i, n));
+
 
   }
 
@@ -98,20 +131,30 @@ export class PieChartViewComponent implements OnInit, OnChanges {
   }
 
   private handleMouseOver(d, i, n) {
+
     d3.select(n[i])
-    .transition('changeSliceFill').duration(300)
+      .transition('changeSliceFill').duration(300)
       .attr('fill', 'gray')
       .attr('transform', 'scale(1.02)');
   }
 
-  private handleMouseOut(d, i , n) {
+  private handleMouseOut(d, i, n) {
+    this.tip.hide(d);
     d3.select(n[i])
-    .transition('changeSliceFill').duration(300)
+      .transition('changeSliceFill').duration(300)
       .attr('transform', 'scale(1)')
       .attr('fill', this.colour(d.data.name));
   }
 
-  private handleClickEvent(d, i , n) {
-    this.deleteData.emit(d.data.id);
+  private handleClickEvent(d, i, n) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: 'Do you confirm the deletion of this data?'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.chartService.deleteChartData(d.data.id, 'expenses');
+      }
+    });
   }
 }

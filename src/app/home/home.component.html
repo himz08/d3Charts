@@ -10,15 +10,19 @@
       <mat-sidenav class="sidenav" #snav [mode]="mobileQuery.matches ? 'push' : 'side'"
                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list>
-                <a mat-list-item> Hello </a>
-                <a mat-list-item> One</a>
-                <a mat-list-item> Two</a>
+                <a mat-list-item [ngClass]="{'selectedTab' : pageId === 1}" (click)="navigate(1)"> Line Chart </a>
+                <a mat-list-item [ngClass]="{'selectedTab' : pageId === 2}" (click)="navigate(2)"> Bar Chart</a>
+                <a mat-list-item [ngClass]="{'selectedTab' : pageId === 3}" (click)="navigate(3)"> Pie Chart</a>
+                <a mat-list-item [ngClass]="{'selectedTab' : pageId === 4}" (click)="navigate(4)"> Hieracrchy Chart</a>
+                <a mat-list-item  class="druidData"> Druid Data</a>
+
+
           <!-- <a mat-list-item [ngClass]="{'activeClass' : nav.id == activeID  }" (click)="onSideNavItemClick(nav)" *ngFor="let nav of fillerNav">{{nav.displayName}}</a> -->
         </mat-nav-list>
       </mat-sidenav>
   
       <mat-sidenav-content>
-          Hello
+
 
         <router-outlet></router-outlet>
     </mat-sidenav-content>

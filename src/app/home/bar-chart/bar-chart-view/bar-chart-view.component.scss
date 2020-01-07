@@ -1,4 +1,22 @@
 svg {
-    border: solid 1px #bcbcbc;
     margin-bottom: 100px;
+    width: 100%;
+}
+
+.main-container {
+    width: 600px;
+    height: 100vh;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-container {
+        width: 80vw;
+    }
+ }
+
+@media only screen and (max-width : 425px) {
+    .main-container {
+        width: 98vw;
+        margin: auto;
+    }
 }

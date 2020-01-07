@@ -1,6 +1,6 @@
 import { Component, OnInit, SimpleChanges, Input, OnChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { BarChartService } from '../bar-chart.service';
+import { ChartService } from '../../../shared/services/chart.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader'; // Import NgxUiLoaderService
 
 // D3 dependencies
@@ -10,6 +10,8 @@ import * as d3Scale from 'd3-scale';
 import * as d3Axis from 'd3-axis';
 import * as d3Array from 'd3-array';
 import { BarChartData } from 'src/app/shared/interfaces/interface';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-bar-chart-view',
@@ -38,8 +40,9 @@ export class BarChartViewComponent implements OnInit, OnChanges {
   xAxisGroup: any;
   yAxisGroup: any;
 
-  constructor(private chartService: BarChartService,
-              private ngxLoader: NgxUiLoaderService
+  constructor(private chartService: ChartService,
+              private ngxLoader: NgxUiLoaderService,
+              public dialog: MatDialog
     ) {
     this.graphWidth = this.width - this.margin.left - this.margin.right;
     this.graphHeight = this.height - this.margin.top - this.margin.bottom;
@@ -99,7 +102,8 @@ export class BarChartViewComponent implements OnInit, OnChanges {
     rects.attr('x', (d) => this.x(d.Name))
       .attr('fill', (d) => {
         // return d.fill
-        return '#357392';
+        // return '#357392';
+        return '#00bfa5';
       })
       .attr('width', this.x.bandwidth())
       .transition().duration(500)
@@ -112,7 +116,9 @@ export class BarChartViewComponent implements OnInit, OnChanges {
       .attr('x', (d) => this.x(d.Name))
       .attr('fill', (d) => {
         // return d.fill
-        return '#357392';
+        // return '#357392';
+        return '#00bfa5';
+
       })
       .attr('width', this.x.bandwidth())
       .attr('y', this.graphHeight)
@@ -121,6 +127,15 @@ export class BarChartViewComponent implements OnInit, OnChanges {
         return this.graphHeight - this.y(d.Orders);
       }))
       .attr('y', (d) => this.y(d.Orders));
+
+          // add event listener
+    d3.selectAll('rect')
+    .attr('class', 'eventListeners')
+    .on('mouseover', (d, i, n) => {
+      this.handleMouseOver(d, i, n);
+    })
+    .on('mouseout', (d, i, n) => this.handleMouseOut(d, i, n))
+    .on('click', (d, i, n) => this.handleClickEvent(d, i, n));
 
     const xAxis = d3Axis.axisBottom(this.x);
     const yAxis = d3Axis.axisLeft(this.y)
@@ -139,6 +154,33 @@ export class BarChartViewComponent implements OnInit, OnChanges {
     if (this.isInputDataAvailable === true) {
       this.update(this.data);
     }
+  }
+
+  private handleMouseOver(d, i, n) {
+
+    d3.select(n[i])
+      .transition('changeSliceFill').duration(300)
+      .attr('fill', 'gray')
+      .attr('transform', 'scale(1.009)');
+  }
+
+  private handleMouseOut(d, i, n) {
+    d3.select(n[i])
+      .transition('changeSliceFill').duration(300)
+      .attr('transform', 'scale(1)')
+      .attr('fill', '#357392');
+  }
+
+  private handleClickEvent(d, i, n) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: 'Do you confirm the deletion of this data?'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.chartService.deleteChartData(d.id, 'dishes');
+      }
+    });
   }
 
 }

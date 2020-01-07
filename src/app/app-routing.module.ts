@@ -8,10 +8,6 @@ import { HierarchyChartComponent } from './home/hierarchy-chart/hierarchy-chart.
 import { PieChartComponent } from './home/pie-chart/pie-chart.component';
 
 
-
-
-
-
 const appRoutes: Routes = [
     { path : 'home', component : HomeComponent, children : [
         {path : 'lineChart' , component : LineChartComponent},

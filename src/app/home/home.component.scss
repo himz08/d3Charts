@@ -47,6 +47,12 @@
     z-index: 10;
   }
 
+  .selectedTab {
+    background: #efefef;
+    color: #00bfa5;
+    font-weight: 600;
+  }
+
   mat-sidenav-content {
     z-index: 2;
   }
@@ -66,6 +72,13 @@
 
   .mat-list-item:hover {
     background: white;
+    color: inherit;
+  }
+
+  .druidData {
+    color: #00bfa5;
+    background-color: #333333;
+    font-weight: 600;
   }
   @media only screen and (max-width: 425px) {
     .sidenav {

@@ -1,9 +1,74 @@
+
+$base-color: #333333;
+$text-color: whitesmoke;
+$active-button: #00bfa5;
+
 .main-container {
-    width: 90%;
-    height: 100%;
-    background: lightblue;
-    margin: 10px auto 0px;
+    height: 100vh;
+    width: 99%;
+    margin: 0px auto;
+    text-align: center;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+
+    .navBar {
+        padding: 10px 0px;
+        width: 100%;
+        margin: 10px auto;
+        background: #efefef;
+        color: black;
+        box-shadow: 0 0 0 0 white;
+    }
+
+    .canvas {
+        margin: 10px 30px 10px 10px !important;
+    }
+    button {
+        background: $base-color !important;
+        margin-bottom: 20px;
+        width: 75%;
+        padding: 16px;
+        font-size: 1.2em;
+        color: whitesmoke;
+        border: 0;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:focus {
+        outline: none;
+    }
+    .activeBtn {
+        background: $active-button !important;
+    }
+
+    form {
+        span {
+            color: $active-button !important;
+        }
+    }
+}
+
+.section-2 {
+    .canvasContainer {
+        margin: 0px auto;
+    }
+    .serverName {
+        color: $active-button;
+        font-size: 20px;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .input-box {
+        padding: 25px;
+        text-align: left;
+        width: 80%;
+        margin: auto auto 100px;
+        border: solid 1px lightgray;
+        button {
+            max-width: 250px;
+        }
+    }
 }

@@ -1,0 +1,15 @@
+<h2 style="margin: auto;" mat-dialog-title>{{'Add Member'}}</h2>
+
+<mat-dialog-content [formGroup]="form">
+
+        <input matInput placeholder="Name" formControlName="name">
+        <input matInput placeholder="Report To" formControlName="parent">
+        <input matInput placeholder="Department" formControlName="department">
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Close</button>
+    <button [disabled]="!form.valid" class="mat-raised-button mat-primary" (click)="save()">Save</button>
+</mat-dialog-actions>
