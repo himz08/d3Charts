@@ -26,7 +26,26 @@ export class BarChartViewComponent implements OnInit, OnChanges {
     bottom: 100,
     left: 100
   };
-  @Input() data: BarChartData[] = [];
+
+  @Input() config: {
+    scaleType: string;  // Value based linear or time stamp
+    xPoints: number; // no of x-axis points required - Send null for the default.
+    yPoints: number; // no of y axis ticks, send null for default
+    yUnitName: string; // If you want to add something
+    xId: string; // xLabel
+    yId: string; // yLabel
+
+  } = {
+    scaleType : null,
+    xPoints : null,
+    yPoints : null,
+    yUnitName : null,
+    yId : null,
+    xId : null
+
+  };
+
+  @Input() data: any[] = [];
   private subscription: Subscription;
   private graphWidth: number;
   private graphHeight: number;
@@ -67,13 +86,21 @@ export class BarChartViewComponent implements OnInit, OnChanges {
 
   private setScales() {
     // scale manipulation
+    this.config.scaleType = 'scaleBand';
+    if (this.config.scaleType === 'scaleTime') {
+
+    } else if (this.config.scaleType === 'scaleLinear') {
+
+    } else if (this.config.scaleType === 'scaleBand') {
+      this.x = d3Scale.scaleBand()
+      .range([0, this.graphWidth])
+      .paddingInner(0.2)
+      .paddingOuter(0.2);
+    };
     this.y = d3Scale.scaleLinear()
       .range([this.graphHeight, 0]);
 
-    this.x = d3Scale.scaleBand()
-      .range([0, 450])
-      .paddingInner(0.2)
-      .paddingOuter(0.2);
+
   }
 
   private createAxis() {

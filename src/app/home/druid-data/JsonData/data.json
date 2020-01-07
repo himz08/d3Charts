@@ -1,0 +1,893 @@
+{
+    "allCPU" : [
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.2,
+            "total": 5,
+            "instance_name": "centos_001",
+            "metric_type": "cpu",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 1.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.3333333333333333,
+            "total": 3,
+            "instance_name": "testing_001",
+            "metric_type": "cpu",
+            "instance_uuid": "a1ec18bd-e41a-479d-91ce-70a48c00f264",
+            "double_sum": 1.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.6,
+            "total": 5,
+            "instance_name": "testing_002",
+            "metric_type": "cpu",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 3.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.25,
+            "total": 4,
+            "instance_name": "testing_003",
+            "metric_type": "cpu",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 1.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.08333333333333333,
+            "total": 6,
+            "instance_name": "testing_004",
+            "metric_type": "cpu",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.2,
+            "total": 5,
+            "instance_name": "testing_005",
+            "metric_type": "cpu",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 1.0
+          }
+        }
+      ],
+
+    "minCPU" : [
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 1,
+            "instance_name": "testing_004",
+            "metric_type": "cpu",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:41:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 2,
+            "instance_name": "centos_001",
+            "metric_type": "cpu",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:41:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.75,
+            "total": 2,
+            "instance_name": "testing_002",
+            "metric_type": "cpu",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 1.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:41:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 1,
+            "instance_name": "testing_004",
+            "metric_type": "cpu",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:41:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.25,
+            "total": 2,
+            "instance_name": "testing_005",
+            "metric_type": "cpu",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:42:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 1,
+            "instance_name": "testing_001",
+            "metric_type": "cpu",
+            "instance_uuid": "a1ec18bd-e41a-479d-91ce-70a48c00f264",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:42:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.25,
+            "total": 2,
+            "instance_name": "testing_003",
+            "metric_type": "cpu",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:43:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 1,
+            "instance_name": "centos_001",
+            "metric_type": "cpu",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:43:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 1,
+            "instance_name": "testing_002",
+            "metric_type": "cpu",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:43:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 2,
+            "instance_name": "testing_004",
+            "metric_type": "cpu",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:43:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 1,
+            "instance_name": "testing_005",
+            "metric_type": "cpu",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:44:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 1,
+            "instance_name": "centos_001",
+            "metric_type": "cpu",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:44:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 2,
+            "instance_name": "testing_001",
+            "metric_type": "cpu",
+            "instance_uuid": "a1ec18bd-e41a-479d-91ce-70a48c00f264",
+            "double_sum": 1.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:44:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 1,
+            "instance_name": "testing_002",
+            "metric_type": "cpu",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:44:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 1,
+            "instance_name": "testing_003",
+            "metric_type": "cpu",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:44:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 1,
+            "instance_name": "testing_005",
+            "metric_type": "cpu",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:45:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 1,
+            "instance_name": "testing_003",
+            "metric_type": "cpu",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:45:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 1,
+            "instance_name": "testing_004",
+            "metric_type": "cpu",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:46:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 1,
+            "instance_name": "centos_001",
+            "metric_type": "cpu",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:46:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.5,
+            "total": 1,
+            "instance_name": "testing_002",
+            "metric_type": "cpu",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:46:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 1,
+            "instance_name": "testing_004",
+            "metric_type": "cpu",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 0.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:46:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.0,
+            "total": 1,
+            "instance_name": "testing_005",
+            "metric_type": "cpu",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 0.0
+          }
+        }
+      ],
+
+    "hourCPU" : [
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.2,
+            "total": 5,
+            "instance_name": "centos_001",
+            "metric_type": "cpu",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 1.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.3333333333333333,
+            "total": 3,
+            "instance_name": "testing_001",
+            "metric_type": "cpu",
+            "instance_uuid": "a1ec18bd-e41a-479d-91ce-70a48c00f264",
+            "double_sum": 1.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.6,
+            "total": 5,
+            "instance_name": "testing_002",
+            "metric_type": "cpu",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 3.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.25,
+            "total": 4,
+            "instance_name": "testing_003",
+            "metric_type": "cpu",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 1.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.08333333333333333,
+            "total": 6,
+            "instance_name": "testing_004",
+            "metric_type": "cpu",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 0.5
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 0.2,
+            "total": 5,
+            "instance_name": "testing_005",
+            "metric_type": "cpu",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 1.0
+          }
+        }
+      ],
+
+    "allMEM" : [
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 5,
+            "instance_name": "centos_001",
+            "metric_type": "memory",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 77.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.5,
+            "total": 4,
+            "instance_name": "testing_001",
+            "metric_type": "memory",
+            "instance_uuid": "a1ec18bd-e41a-479d-91ce-70a48c00f264",
+            "double_sum": 62.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 5,
+            "instance_name": "testing_002",
+            "metric_type": "memory",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 77.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 4,
+            "instance_name": "testing_003",
+            "metric_type": "memory",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 61.2
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 6,
+            "instance_name": "testing_004",
+            "metric_type": "memory",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 92.4
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:16.101Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 5,
+            "instance_name": "testing_005",
+            "metric_type": "memory",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 76.5
+          }
+        }
+      ],
+
+    "minMEM" : [
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:40:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 2,
+            "instance_name": "testing_004",
+            "metric_type": "memory",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 30.8
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:41:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 2,
+            "instance_name": "centos_001",
+            "metric_type": "memory",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 30.8
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:41:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 2,
+            "instance_name": "testing_002",
+            "metric_type": "memory",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 30.8
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:41:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 2,
+            "instance_name": "testing_005",
+            "metric_type": "memory",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 30.6
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:42:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.5,
+            "total": 2,
+            "instance_name": "testing_001",
+            "metric_type": "memory",
+            "instance_uuid": "a1ec18bd-e41a-479d-91ce-70a48c00f264",
+            "double_sum": 31.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:42:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 2,
+            "instance_name": "testing_003",
+            "metric_type": "memory",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 30.6
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:43:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 2,
+            "instance_name": "centos_001",
+            "metric_type": "memory",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 30.8
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:43:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 2,
+            "instance_name": "testing_002",
+            "metric_type": "memory",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 30.8
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:43:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 2,
+            "instance_name": "testing_004",
+            "metric_type": "memory",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 30.8
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:43:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 2,
+            "instance_name": "testing_005",
+            "metric_type": "memory",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 30.6
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:44:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.5,
+            "total": 2,
+            "instance_name": "testing_001",
+            "metric_type": "memory",
+            "instance_uuid": "a1ec18bd-e41a-479d-91ce-70a48c00f264",
+            "double_sum": 31.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:44:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 2,
+            "instance_name": "testing_003",
+            "metric_type": "memory",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 30.6
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:45:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 2,
+            "instance_name": "testing_004",
+            "metric_type": "memory",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 30.8
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:46:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 1,
+            "instance_name": "centos_001",
+            "metric_type": "memory",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 15.4
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:46:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 1,
+            "instance_name": "testing_002",
+            "metric_type": "memory",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 15.4
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:46:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 1,
+            "instance_name": "testing_005",
+            "metric_type": "memory",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 15.3
+          }
+        }
+      ],
+
+    "hourMEM" : [
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 5,
+            "instance_name": "centos_001",
+            "metric_type": "memory",
+            "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",
+            "double_sum": 77.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.5,
+            "total": 4,
+            "instance_name": "testing_001",
+            "metric_type": "memory",
+            "instance_uuid": "a1ec18bd-e41a-479d-91ce-70a48c00f264",
+            "double_sum": 62.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 5,
+            "instance_name": "testing_002",
+            "metric_type": "memory",
+            "instance_uuid": "8df01ff6-0bab-4633-a92f-4770ab999013",
+            "double_sum": 77.0
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 4,
+            "instance_name": "testing_003",
+            "metric_type": "memory",
+            "instance_uuid": "fb75c4b8-2f8d-41a6-aa7e-3cbb7b117f3f",
+            "double_sum": 61.2
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.4,
+            "total": 6,
+            "instance_name": "testing_004",
+            "metric_type": "memory",
+            "instance_uuid": "68c5b6d8-0e44-4378-bb95-4e6d5bfef9af",
+            "double_sum": 92.4
+          }
+        },
+        {
+          "version": "v1",
+          "timestamp": "2020-01-02T11:00:00.000Z",
+          "event": {
+            "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
+            "other_details": null,
+            "average": 15.3,
+            "total": 5,
+            "instance_name": "testing_005",
+            "metric_type": "memory",
+            "instance_uuid": "a96e32e8-f717-455d-80a3-7331d261ea8f",
+            "double_sum": 76.5
+          }
+        }
+      ],
+    "error" : {
+        "error": "Unknown exception",
+        "errorMessage": "Instantiation of [simple type, class io.druid.java.util.common.granularity.Granularity] value failed: No enum constant io.druid.java.util.common.granularity.GranularityType.HOU",
+        "errorClass": "com.fasterxml.jackson.databind.JsonMappingException",
+        "host": null
+      }
+}
