@@ -83,7 +83,11 @@ export class BarChartViewComponent implements OnInit, OnChanges {
   }
 
   private initSvg() {
-    this.svg = d3.select('svg')
+    this.svg = d3.select('.canvas')
+      .append('div')
+      .attr('style', 'width : inherit; height: inherit')
+      .append('svg')
+      .attr('viewBox', '0 0 600 600')
       .append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
   }

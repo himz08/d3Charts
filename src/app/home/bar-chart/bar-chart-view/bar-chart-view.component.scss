@@ -1,11 +1,6 @@
-svg {
-    margin-bottom: 100px;
-    width: 100%;
-}
 
-.main-container {
-    width: 600px;
-    height: 100vh;
+:host  {
+    width: 100%;
 }
 
 @media only screen and (max-width: 768px) {
