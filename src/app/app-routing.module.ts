@@ -6,7 +6,7 @@ import { BarChartComponent } from './home/bar-chart/bar-chart.component';
 import { AreaChartComponent } from './home/area-chart/area-chart.component';
 import { HierarchyChartComponent } from './home/hierarchy-chart/hierarchy-chart.component';
 import { PieChartComponent } from './home/pie-chart/pie-chart.component';
-import { DruidDataComponent } from './home/druid-data/druid-data.component';
+import { DruidDataComponent } from './druid-data/druid-data.component';
 
 
 

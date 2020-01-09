@@ -25,14 +25,11 @@ import { BarChartComponent } from './home/bar-chart/bar-chart.component';
 import { AreaChartComponent } from './home/area-chart/area-chart.component';
 import { HierarchyChartComponent } from './home/hierarchy-chart/hierarchy-chart.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
-import { BarChartViewComponent } from './home/bar-chart/bar-chart-view/bar-chart-view.component';
 import { PieChartComponent } from './home/pie-chart/pie-chart.component';
-import { PieChartViewComponent } from './home/pie-chart/pie-chart-view/pie-chart-view.component';
-import { LineChartViewComponent } from './home/line-chart/line-chart-view/line-chart-view.component';
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
-import { HeirachyChartViewComponent } from './home/hierarchy-chart/heirachy-chart-view/heirachy-chart-view.component';
 import { DialogBoxComponent } from '../app/home/hierarchy-chart/dialog-box/dialog-box.component'
-import { DruidDataComponent } from './home/druid-data/druid-data.component';
+import { DruidDataComponent } from './druid-data/druid-data.component';
+import { ChartsViewModule } from './charts-view-module/charts-view.module';
 
 
 @NgModule({
@@ -44,12 +41,8 @@ import { DruidDataComponent } from './home/druid-data/druid-data.component';
     AreaChartComponent,
     HierarchyChartComponent,
     LoaderComponent,
-    BarChartViewComponent,
     PieChartComponent,
-    PieChartViewComponent,
-    LineChartViewComponent,
     ConfirmationDialogComponent,
-    HeirachyChartViewComponent,
     DialogBoxComponent,
     DruidDataComponent
   ],
@@ -66,7 +59,8 @@ import { DruidDataComponent } from './home/druid-data/druid-data.component';
     AngularFirestoreModule,
     NgxUiLoaderModule,
     HttpClientModule,
-    HttpClientJsonpModule
+    HttpClientJsonpModule,
+    ChartsViewModule
   ],
   providers: [],
   entryComponents: [ConfirmationDialogComponent, DialogBoxComponent],

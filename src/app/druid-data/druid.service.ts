@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DruidData } from '../../shared/interfaces/interface';
+import { DruidData } from '../shared/interfaces/interface';
 import { map } from 'rxjs/operators';
 
 @Injectable({

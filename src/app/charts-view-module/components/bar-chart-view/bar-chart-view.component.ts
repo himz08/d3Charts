@@ -35,7 +35,8 @@ export class BarChartViewComponent implements OnInit, OnChanges {
     xId: string; // xLabel
     yId: string; // yLabel
     onClickEnable: boolean
-    hoverEnable: boolean
+    hoverEnable: boolean;
+    axisColor: string;
 
   } = {
       scaleType: 'scaleBand',
@@ -45,7 +46,8 @@ export class BarChartViewComponent implements OnInit, OnChanges {
       xId: 'Name',
       yId: 'Orders',
       onClickEnable: true,
-      hoverEnable: false
+      hoverEnable: false,
+      axisColor: 'black'
 
     };
 
@@ -115,8 +117,12 @@ export class BarChartViewComponent implements OnInit, OnChanges {
   private createAxis() {
     // Create Axis group
     this.xAxisGroup = this.svg.append('g')
-      .attr('transform', `translate(0,${this.graphHeight})`);
-    this.yAxisGroup = this.svg.append('g');
+    .attr('class', 'x-axis')
+      .attr('transform', `translate(0,${this.graphHeight})`)
+      .attr('stroke-width', 1);
+    this.yAxisGroup = this.svg.append('g')
+    .attr('class', 'y-axis')
+    .attr('stroke', this.config.axisColor);
   }
 
   private update(data) {
@@ -186,15 +192,20 @@ export class BarChartViewComponent implements OnInit, OnChanges {
         .on('click', (d, i, n) => this.handleClickEvent(d, i, n));
     }
 
-
+    // axis
     const xAxis = d3Axis.axisBottom(this.x);
     const yAxis = d3Axis.axisLeft(this.y)
       .tickFormat(d => d + ' ' + this.config.yUnitName);
+
     this.xAxisGroup.call(xAxis);
     this.yAxisGroup.call(yAxis);
     this.xAxisGroup.selectAll('text')
       .attr('transform', 'rotate(-40)')
-      .attr('text-anchor', 'end');
+      .attr('text-anchor', 'end')
+      .attr('style', `color: ${this.config.axisColor}`);
+
+    d3.selectAll('line').attr('stroke', this.config.axisColor);
+    d3.selectAll('path').attr('stroke', this.config.axisColor);
 
   }
 
