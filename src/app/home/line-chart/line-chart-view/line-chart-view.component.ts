@@ -139,7 +139,7 @@ export class LineChartViewComponent implements OnInit, OnChanges {
     this.graph.selectAll('circle')
       .on('mouseover', (d, i, n) => this.handleMouseOver(d, i, n))
       .on('mouseout', (d, i, n) => this.handleMouseOut(d, i, n))
-      .on('click', (d, i , n) => this.handleClickEvent(d, i ,n));
+      .on('click', (d, i , n) => this.handleClickEvent(d, i , n));
     }
     private handleMouseOver(d, i , n) {
       d3.select(n[i]).transition('circleIncrease').duration(100)

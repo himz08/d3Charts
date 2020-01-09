@@ -34,16 +34,20 @@ export class BarChartViewComponent implements OnInit, OnChanges {
     yUnitName: string; // If you want to add something
     xId: string; // xLabel
     yId: string; // yLabel
+    onClickEnable: boolean
+    hoverEnable: boolean
 
   } = {
-    scaleType : null,
-    xPoints : null,
-    yPoints : null,
-    yUnitName : null,
-    yId : null,
-    xId : null
+      scaleType: 'scaleBand',
+      xPoints: null,
+      yPoints: null,
+      yUnitName: 'Orders',
+      xId: 'Name',
+      yId: 'Orders',
+      onClickEnable: true,
+      hoverEnable: false
 
-  };
+    };
 
   @Input() data: any[] = [];
   private subscription: Subscription;
@@ -62,7 +66,7 @@ export class BarChartViewComponent implements OnInit, OnChanges {
   constructor(private chartService: ChartService,
               private ngxLoader: NgxUiLoaderService,
               public dialog: MatDialog
-    ) {
+  ) {
     this.graphWidth = this.width - this.margin.left - this.margin.right;
     this.graphHeight = this.height - this.margin.top - this.margin.bottom;
 
@@ -86,17 +90,18 @@ export class BarChartViewComponent implements OnInit, OnChanges {
 
   private setScales() {
     // scale manipulation
-    this.config.scaleType = 'scaleBand';
+    // this.config.scaleType = 'scaleBand';
     if (this.config.scaleType === 'scaleTime') {
-
+      this.x = d3Scale.scaleTime()
+        .range([0, this.graphWidth]);
     } else if (this.config.scaleType === 'scaleLinear') {
 
     } else if (this.config.scaleType === 'scaleBand') {
       this.x = d3Scale.scaleBand()
-      .range([0, this.graphWidth])
-      .paddingInner(0.2)
-      .paddingOuter(0.2);
-    };
+        .range([0, this.graphWidth])
+        .paddingInner(0.2)
+        .paddingOuter(0.2);
+    }
     this.y = d3Scale.scaleLinear()
       .range([this.graphHeight, 0]);
 
@@ -112,9 +117,15 @@ export class BarChartViewComponent implements OnInit, OnChanges {
 
   private update(data) {
     // Update scales
-    this.x.domain(data.map(d => d.Name));
-    this.y.domain([0, d3Array.max(data, (d: BarChartData) => d.Orders)]);
+    this.x.domain(data.map(d => d[this.config.xId]));
+    let startValue = (d3Array.min(data, (d: any) => d[this.config.yId]) as any) - 1;
+    if (startValue < 0) {
+      startValue = 0;
+    }
+    const endValue = d3Array.max(data, (d: any) => d[this.config.yId]);
+    this.y.domain([startValue, endValue]);
 
+    console.warn(d3Array.max(data, (d: any) => d[this.config.yId]));
 
     // join data
     const rects = this.svg.selectAll('rect')
@@ -126,7 +137,7 @@ export class BarChartViewComponent implements OnInit, OnChanges {
 
     // aattr
 
-    rects.attr('x', (d) => this.x(d.Name))
+    rects.attr('x', (d) => this.x(d[this.config.xId]))
       .attr('fill', (d) => {
         // return d.fill
         // return '#357392';
@@ -134,13 +145,13 @@ export class BarChartViewComponent implements OnInit, OnChanges {
       })
       .attr('width', this.x.bandwidth())
       .transition().duration(500)
-      .attr('height', d => this.graphHeight - this.y(d.Orders))
-      .attr('y', (d) => this.y(d.Orders));
+      .attr('height', d => this.graphHeight - this.y(d[this.config.yId]))
+      .attr('y', (d) => this.y(d[this.config.yId]));
 
 
     rects.enter()
       .append('rect')
-      .attr('x', (d) => this.x(d.Name))
+      .attr('x', (d) => this.x(d[this.config.xId]))
       .attr('fill', (d) => {
         // return d.fill
         // return '#357392';
@@ -151,22 +162,30 @@ export class BarChartViewComponent implements OnInit, OnChanges {
       .attr('y', this.graphHeight)
       .transition().duration(500)
       .attr('height', ((d) => {
-        return this.graphHeight - this.y(d.Orders);
+        return this.graphHeight - this.y(d[this.config.yId]);
       }))
-      .attr('y', (d) => this.y(d.Orders));
+      .attr('y', (d) => this.y(d[this.config.yId]));
 
-          // add event listener
-    d3.selectAll('rect')
-    .attr('class', 'eventListeners')
-    .on('mouseover', (d, i, n) => {
-      this.handleMouseOver(d, i, n);
-    })
-    .on('mouseout', (d, i, n) => this.handleMouseOut(d, i, n))
-    .on('click', (d, i, n) => this.handleClickEvent(d, i, n));
+    // add event listener
+    if (this.config.hoverEnable) {
+      d3.selectAll('rect')
+        .attr('class', 'eventListeners')
+        .on('mouseover', (d, i, n) => {
+          this.handleMouseOver(d, i, n);
+        })
+        .on('mouseout', (d, i, n) => this.handleMouseOut(d, i, n))
+    }
+
+    if (this.config.onClickEnable) {
+      d3.selectAll('rect')
+        .attr('class', 'eventListeners')
+        .on('click', (d, i, n) => this.handleClickEvent(d, i, n));
+    }
+
 
     const xAxis = d3Axis.axisBottom(this.x);
     const yAxis = d3Axis.axisLeft(this.y)
-      .tickFormat(d => d + ' Orders');
+      .tickFormat(d => d + ' ' + this.config.yUnitName);
     this.xAxisGroup.call(xAxis);
     this.yAxisGroup.call(yAxis);
     this.xAxisGroup.selectAll('text')

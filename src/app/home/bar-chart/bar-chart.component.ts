@@ -40,7 +40,7 @@ export class BarChartComponent implements OnInit, OnDestroy {
       this.ngxLoader.stop();
       console.log('res-----', res);
       // this.data = [];
- 
+
       res.forEach(change => {
         const doc = { ...change.payload.doc.data(), id: change.payload.doc.id };
         this.checkTypeAndUpdateData(change, doc);

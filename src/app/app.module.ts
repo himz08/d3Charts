@@ -32,6 +32,7 @@ import { LineChartViewComponent } from './home/line-chart/line-chart-view/line-c
 import { ConfirmationDialogComponent } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 import { HeirachyChartViewComponent } from './home/hierarchy-chart/heirachy-chart-view/heirachy-chart-view.component';
 import { DialogBoxComponent } from '../app/home/hierarchy-chart/dialog-box/dialog-box.component'
+import { DruidDataComponent } from './home/druid-data/druid-data.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { DialogBoxComponent } from '../app/home/hierarchy-chart/dialog-box/dialo
     LineChartViewComponent,
     ConfirmationDialogComponent,
     HeirachyChartViewComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    DruidDataComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -6,6 +6,8 @@ import { BarChartComponent } from './home/bar-chart/bar-chart.component';
 import { AreaChartComponent } from './home/area-chart/area-chart.component';
 import { HierarchyChartComponent } from './home/hierarchy-chart/hierarchy-chart.component';
 import { PieChartComponent } from './home/pie-chart/pie-chart.component';
+import { DruidDataComponent } from './home/druid-data/druid-data.component';
+
 
 
 const appRoutes: Routes = [
@@ -14,7 +16,9 @@ const appRoutes: Routes = [
         {path : 'barChart' , component : BarChartComponent},
         {path : 'areaChart' , component : AreaChartComponent},
         {path : 'hChart', component : HierarchyChartComponent},
-        {path : 'pieChart', component : PieChartComponent}
+        {path : 'pieChart', component : PieChartComponent},
+        {path : 'druid' , component : DruidDataComponent},
+
     ]},
     { path : '' , redirectTo : 'home/lineChart', pathMatch : 'full'}
 ];

@@ -23,3 +23,20 @@ export interface HChartData {
     department: string;
     id?: any;
 }
+
+export interface DruidData   {
+    'version': string;
+    'timestamp': string;
+    'average'?: number;
+    'instance_name'?: string;
+    'event': {
+      'project_uuid': string;
+      'other_details': null,
+      'average': number;
+      'total': 5,
+      'instance_name': string;
+      'metric_type': string;
+      'instance_uuid': string;
+      'double_sum': number;
+    };
+  }

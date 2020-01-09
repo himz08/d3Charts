@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
     // });
 
     this.http.get<DruidData[]>('http://localhost:3000/allCPU').subscribe(res => {
-      console.log(' :) =---> ', res)
+      console.log(' :) =---> ', res);
     })
   }
 
