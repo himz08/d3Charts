@@ -39,9 +39,8 @@ export class PieChartViewComponent implements OnInit, OnChanges {
     this.arcGenerator = d3Shape.arc()
       .outerRadius(this.dims.radius)
       .innerRadius(this.dims.radius / 2);
-      
-    // this.colour = d3Scale.scaleOrdinal(d3['schemeSet3']);
-    this.colour = d3Scale.scaleOrdinal().range(['#00bfa5', 'transparent','transparent', 'transparent','transparent','transparent'])
+
+    this.colour = d3Scale.scaleOrdinal(d3['schemeSet3']);
 
 
     this.isInputDataAvailable = true;
