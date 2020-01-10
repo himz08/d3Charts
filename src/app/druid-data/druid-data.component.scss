@@ -91,7 +91,11 @@ button:focus {
     left: 0;
 }
 
-
+.lineChartOptions {
+    button {
+        margin-bottom: 5px;
+    }
+}
 // :host app-bar-chart-view /deep/.x-axis path{
 //     stroke: #ccc;
 // }

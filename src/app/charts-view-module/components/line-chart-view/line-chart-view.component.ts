@@ -28,6 +28,31 @@ export class LineChartViewComponent implements OnInit, OnChanges {
     left: 100
   };
 
+  @Input() config: {
+    scaleType: string;  // Value based linear or time stamp
+    xPoints: number; // no of x-axis points required - Send null for the default.
+    yPoints: number; // no of y axis ticks, send null for default
+    yUnitName: string; // If you want to add something
+    xId: string; // xLabel
+    yId: string; // yLabel
+    onClickEnable: boolean
+    hoverEnable: boolean;
+    axisColor: string;
+    dateTimeRepXaxis: string
+
+  } = {
+      scaleType: 'scaleTime',
+      xPoints: null,
+      yPoints: null,
+      yUnitName: 'Orders',
+      xId: 'date',
+      yId: 'distance',
+      onClickEnable: true,
+      hoverEnable: true,
+      axisColor: 'black',
+      dateTimeRepXaxis: '%B %d'
+    };
+
   graphWidth = 560 - this.margin.left - this.margin.right;
   graphHeight = 400 - this.margin.top - this.margin.bottom;
   isInputDataAvailable;
@@ -42,7 +67,7 @@ export class LineChartViewComponent implements OnInit, OnChanges {
   line: any;
   path: any;
 
-  @Input() data: LineChartData[] = [];
+  @Input() data: any[] = [];
 
   constructor(public dialog: MatDialog, private chartService: ChartService) { }
 
@@ -59,6 +84,8 @@ export class LineChartViewComponent implements OnInit, OnChanges {
     const height = this.graphHeight + this.margin.top + this.margin.bottom;
     document.querySelector('.canvas').innerHTML = '';
     this.svg = d3.select('.canvas')
+      // .append('div')
+      // .attr('style', 'width : inherit; height: inherit')
       .append('svg')
       .attr('viewBox', `0,0,${width},${height}`);
       // .attr('width', )
@@ -77,26 +104,30 @@ export class LineChartViewComponent implements OnInit, OnChanges {
     this.xAxisGroup = this.graph
       .append('g')
       .attr('class', 'x-axis')
+      // .attr('stroke', `${this.config.axisColor}`)
+      // .attr('stroke-width', 1)
       .attr('transform', `translate(0,${this.graphHeight})`);
 
     this.yAxisGroup = this.graph
       .append('g')
+      // .attr('stroke', `${this.config.axisColor}`)
+      // .attr('stroke-width', 1)
       .attr('class', 'y-axis');
 
     this.line = d3Shape.line()
-      .x((d: any) => this.x(new Date(d.date)))
-      .y((d: any) => this.y(d.distance));
+    .x((d: any) => this.x(new Date(d[this.config.xId])))
+    .y((d: any) => this.y(d[this.config.yId]));
 
 
   }
 
-  private update(data: LineChartData[]) {
+  private update(data: any[]) {
 
     // data sorting
     data.sort((a, b) => (new Date(a.date) as any) - (new Date(b.date) as any));
     // Set scale domains
-    this.x.domain(d3Array.extent(data, d => new Date(d.date)));
-    this.y.domain([0, d3Array.max(data, d => d.distance)]);
+    this.x.domain(d3Array.extent(data, d => new Date(d[this.config.xId])));
+    this.y.domain([0, d3Array.max(data, d => d[this.config.yId])]);
 
     // update path data
     this.path.data([data])
@@ -112,34 +143,52 @@ export class LineChartViewComponent implements OnInit, OnChanges {
     circles.exit().remove();
 
     // update current
-    circles.attr('cy', d => this.y(d.distance))
-      .attr('cx', d => this.x(new Date(d.date)));
+    circles.attr('cy', d => this.y(d[this.config.yId]))
+      .attr('cx', d => this.x(new Date(d[this.config.xId])));
 
     circles.enter().append('circle')
       .attr('r', 4)
-      .attr('cy', d => this.y(d.distance))
-      .attr('cx', d => this.x(new Date(d.date)))
-      .attr('fill', 'black');
+      .attr('cy', d => this.y(d[this.config.yId]))
+      .attr('cx', d => this.x(new Date(d[this.config.xId])))
+      .attr('fill', this.config.axisColor);
 
     // create axis
-    this.xAxis = d3Axis.axisBottom(this.x).ticks(4).tickFormat(d3Time.timeFormat('%B %d'));
+    this.xAxis = d3Axis.axisBottom(this.x).ticks(4).tickFormat(d3Time.timeFormat(this.config.dateTimeRepXaxis));
     this.yAxis = d3Axis.axisLeft(this.y).ticks(4);
 
     // call axis
-    this.xAxisGroup.call(this.xAxis);
-    this.yAxisGroup.call(this.yAxis);
-
+    this.xAxisGroup.call(this.xAxis)
+                    .attr('stroke', `${this.config.axisColor}`)
+                    .attr('stroke-width', 1);
+    this.yAxisGroup.call(this.yAxis)
+                    .attr('stroke', `${this.config.axisColor}`)
+                    .attr('stroke-width', 1);
+    // Coloring the axis
+    this.xAxisGroup.select('path')
+                    .attr('stroke', this.config.axisColor);
+    this.xAxisGroup.selectAll('line')
+                    .attr('stroke', this.config.axisColor);
+    this.yAxisGroup.select('path')
+                    .attr('stroke', this.config.axisColor);
+    this.yAxisGroup.selectAll('line')
+                    .attr('stroke', this.config.axisColor);
     // rotate axis text
     this.xAxisGroup.selectAll('text')
       .attr('transform', 'rotate(-40)')
-      .attr('text-anchor', 'end');
+      .attr('text-anchor', 'end')
+      .attr('style',  `color: ${this.config.axisColor}`);
 
     // add listeners
-
-    this.graph.selectAll('circle')
-      .on('mouseover', (d, i, n) => this.handleMouseOver(d, i, n))
-      .on('mouseout', (d, i, n) => this.handleMouseOut(d, i, n))
+    if (this.config.onClickEnable) {
+      this.graph.selectAll('circle')
       .on('click', (d, i , n) => this.handleClickEvent(d, i , n));
+    }
+
+    if (this.config.hoverEnable) {
+      this.graph.selectAll('circle')
+      .on('mouseover', (d, i, n) => this.handleMouseOver(d, i, n))
+      .on('mouseout', (d, i, n) => this.handleMouseOut(d, i, n));
+        }
     }
     private handleMouseOver(d, i , n) {
       d3.select(n[i]).transition('circleIncrease').duration(100)
@@ -148,19 +197,19 @@ export class LineChartViewComponent implements OnInit, OnChanges {
 
       console.log(d);
       this.graph.append('line')
-          .attr('x1', this.x(new Date(d.date)))
-          .attr('y1', this.y(d.distance))
-          .attr('x2', this.x(new Date(d.date)))
+          .attr('x1', this.x(new Date(d[this.config.xId])))
+          .attr('y1', this.y(d[this.config.yId]))
+          .attr('x2', this.x(new Date(d[this.config.xId])))
           .attr('y2' , this.graphHeight)
           .attr('stroke', 'gray')
           .attr('stroke-width', 1)
           .attr('stroke-dasharray', 4);
 
       this.graph.append('line')
-          .attr('x1', this.x(new Date(d.date)))
-          .attr('y1', this.y(d.distance))
+          .attr('x1', this.x(new Date(d[this.config.xId])))
+          .attr('y1', this.y(d[this.config.yId]))
           .attr('x2', 0)
-          .attr('y2' , this.y(d.distance))
+          .attr('y2' , this.y(d[this.config.yId]))
           .attr('stroke', 'gray')
           .attr('stroke-width', 1)
           .attr('stroke-dasharray', 4) ;

@@ -47,29 +47,41 @@
 
 
     <div class="chartBox">
-            <!-- <app-bar-chart-view *ngIf="isBarChartDataReady" [data]="dataCPU" [config]="config"></app-bar-chart-view>  -->
-            <app-bar-chart-view  *ngIf="dataCPU && (chartId === 1) " [data]="dataCPU" [config]="config" ></app-bar-chart-view>
+            <!-- <app-bar-chart-view *ngIf="isBarChartDataReady" [data]="data" [config]="configForBarChart"></app-bar-chart-view>  -->
+            <app-bar-chart-view  *ngIf="data && (chartId === 1) " [data]="data" [config]="configForBarChart" ></app-bar-chart-view>
+            <app-line-chart-view *ngIf="data && (chartId === 4)" [data]="data" [config]="configForLineChart"></app-line-chart-view>
+
         </div>
+
+
+        <div *ngIf="instanceNamesAvl.length > 0 && (chartId === 4)" class="lineChartOptions">
+              <div *ngFor="let item of instanceNamesAvl">  <button (click)="onInstanceChange(item)" [ngClass]="{'activeBtn' : item === selectedLineChartOption }">
+                    {{item}}
+                </button>
+                </div>
+            </div>
+
+
         <div *ngIf="false" class="chartBox">
-                <!-- <app-bar-chart-view *ngIf="isBarChartDataReady" [data]="dataCPU" [config]="config"></app-bar-chart-view>  -->
-                <app-bar-chart-view *ngIf="dataMEM" [data]="dataMEM" [config]="config" ></app-bar-chart-view>
+                <!-- <app-bar-chart-view *ngIf="isBarChartDataReady" [data]="data" [configForBarChart]="configForBarChart"></app-bar-chart-view>  -->
+                <app-bar-chart-view *ngIf="dataMEM" [data]="dataMEM" [config]="configForBarChart" ></app-bar-chart-view>
             </div>
 </div>
 </div>
 <!-- <div style="display: flex;">
 <div class="chartCPU">
-    <app-bar-chart-view  *ngIf="dataCPU" [data]="dataCPU" [config]="config" ></app-bar-chart-view>
+    <app-bar-chart-view  *ngIf="data" [data]="data" [config]="configForBarChart" ></app-bar-chart-view>
 </div>
 
 <div class="chartMEM">
-    <app-bar-chart-view  *ngIf="dataMEM" [data]="dataMEM" [config]="config" ></app-bar-chart-view>
+    <app-bar-chart-view  *ngIf="dataMEM" [data]="dataMEM" [config]="configForBarChart" ></app-bar-chart-view>
 </div>
 </div> -->
 
 <!-- <div class="check">
-    <app-bar-chart-view  *ngIf="dataCPU" [data]="dataCPU" [config]="config" ></app-bar-chart-view>
+    <app-bar-chart-view  *ngIf="data" [data]="data" [config]="configForBarChart" ></app-bar-chart-view>
 </div>
 
 <div class="check2">
-    <app-bar-chart-view  *ngIf="dataMEM" [data]="dataMEM" [config]="config" ></app-bar-chart-view>
+    <app-bar-chart-view  *ngIf="dataMEM" [data]="dataMEM" [config]="configForBarChart" ></app-bar-chart-view>
 </div> -->

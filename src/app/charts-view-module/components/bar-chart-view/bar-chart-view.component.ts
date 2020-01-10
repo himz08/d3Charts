@@ -9,7 +9,6 @@ import * as d3Shape from 'd3-shape';
 import * as d3Scale from 'd3-scale';
 import * as d3Axis from 'd3-axis';
 import * as d3Array from 'd3-array';
-import { BarChartData } from 'src/app/shared/interfaces/interface';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material';
 
