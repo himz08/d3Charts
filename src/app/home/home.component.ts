@@ -51,6 +51,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     } else if (id === 4) {
       this.route.navigate(['home/hChart']);
 
+    } else if (id === 5) {
+      this.route.navigate(['home/druid']);
     } else {
       this.route.navigate(['/home']);
     }

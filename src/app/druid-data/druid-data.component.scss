@@ -30,12 +30,6 @@ $grayTextColor: #9e9e9e;
     background: $background;
     margin-left: 50px;
 
-        .selectSource {
-
-        }
-
-        .selectGraph {
-        }
 }
 
 button {
@@ -70,10 +64,9 @@ button:focus {
 
 .chartBox {
     width: 600px;
-    height: 600px;
     border: solid 1px whitesmoke;
     border-radius: 10px;
-    // margin: 25px 50px;
+    margin-bottom: 100px;
 }
 .check {
     width: 600px;
@@ -96,20 +89,17 @@ button:focus {
         margin-bottom: 5px;
     }
 }
-// :host app-bar-chart-view /deep/.x-axis path{
-//     stroke: #ccc;
-// }
+
+:host app-pie-chart-view .canvas {
+   
+        display: flex !important;
+        justify-content: center !important;
+    
+}
+
 @media only screen  and (max-width:425px) {
     .filterTab {
         margin: 0px;
         padding: 0px 14px;
     }
 }
-// .x-axis path, .y-axis path,
-// .x-axis line, .y-axis line{
-//   stroke: #ccc;
-// }
-// .x-axis text, .y-axis text{
-//   fill: #ccc;
-//   font-size: 14px;
-// }

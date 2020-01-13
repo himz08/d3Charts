@@ -1,23 +1,25 @@
-
 <div class="main">
-        <div class="navBar">
-                Charts with Druid Data
-            </div>
+    <div class="navBar">
+        Charts with Druid Data
+    </div>
     <div class="filterTab">
 
-        <div class="selectSource"> 
+        <div class="selectSource">
             <div class="row">
-                    <button (click)="onSourceChange(1)" [ngClass]="{'activeBtn' : sourceId === 1 }" class="col col-md-2 col-sm-6 Cpu">
-                            CPU
-                        </button>
-             
-                        <button (click)="onSourceChange(2)" [ngClass]="{'activeBtn' : sourceId === 2 }" class="col col-md-2 col-sm-6 Mem">
-                            Memmory
-                        </button>
-            
-                        <button (click)="onSourceChange(3)" [ngClass]="{'activeBtn' : sourceId === 3 }" class="col col-md-2 col-sm-6 Both">
-                            Both <span style="font-size: 12px; color: gray;"> ( Coming Soon )</span> 
-                        </button>
+                <button (click)="onSourceChange(1)" [ngClass]="{'activeBtn' : sourceId === 1 }"
+                    class="col col-md-2 col-sm-6 Cpu">
+                    CPU
+                </button>
+
+                <button (click)="onSourceChange(2)" [ngClass]="{'activeBtn' : sourceId === 2 }"
+                    class="col col-md-2 col-sm-6 Mem">
+                    Memmory
+                </button>
+
+                <!-- <button (click)="onSourceChange(3)" [ngClass]="{'activeBtn' : sourceId === 3 }"
+                    class="col col-md-2 col-sm-6 Both">
+                    Both <span style="font-size: 12px; color: gray;"> ( Coming Soon )</span>
+                </button> -->
             </div>
 
         </div>
@@ -25,63 +27,49 @@
         <div class="selectGraph">
             <div class="row">
 
-            <button (click)="onChartChange(1)" [ngClass]="{'activeBtn' : chartId === 1 }" class="col col-md-2 col-sm-6 barChart">
-                Bar Chart
-            </button>
+                <button (click)="onChartChange(1)" [ngClass]="{'activeBtn' : chartId === 1 }"
+                    class="col col-md-2 col-sm-6 barChart">
+                    Bar Chart
+                </button>
 
-            <button (click)="onChartChange(2)" [ngClass]="{'activeBtn' : chartId === 2 }" class="col col-md-2 col-sm-6 pieChart">
-                Pie Chart
-            </button>
+                <button (click)="onChartChange(2)" [ngClass]="{'activeBtn' : chartId === 2 }"
+                    class="col col-md-2 col-sm-6 pieChart">
+                    Pie Chart
+                </button>
 
-            <button (click)="onChartChange(3)" [ngClass]="{'activeBtn' : chartId === 3 }" class="col col-md-2 col-sm-6 hChart">
-                Hierachy Chart
-            </button>
+                <!-- <button (click)="onChartChange(3)" [ngClass]="{'activeBtn' : chartId === 3 }"
+                    class="col col-md-2 col-sm-6 hChart">
+                    Hierachy Chart
+                </button> -->
 
-            <button (click)="onChartChange(4)" [ngClass]="{'activeBtn' : chartId === 4 }" class="col col-md-2 col-sm-6 lineChart">
-                Line Chart
-            </button>
-        </div>
+                <button (click)="onChartChange(4)" [ngClass]="{'activeBtn' : chartId === 4 }"
+                    class="col col-md-2 col-sm-6 lineChart">
+                    Line Chart
+                </button>
+            </div>
         </div>
     </div>
-<div class="chartContainer">
+    <div class="chartContainer">
 
-
-    <div class="chartBox">
-            <!-- <app-bar-chart-view *ngIf="isBarChartDataReady" [data]="data" [config]="configForBarChart"></app-bar-chart-view>  -->
-            <app-bar-chart-view  *ngIf="data && (chartId === 1) " [data]="data" [config]="configForBarChart" ></app-bar-chart-view>
-            <app-line-chart-view *ngIf="data && (chartId === 4)" [data]="data" [config]="configForLineChart"></app-line-chart-view>
-
+        <div class="chartBox" [ngStyle]="{'height.px': chartBoxHeight }">
+            <app-bar-chart-view *ngIf="data && (chartId === 1) " [data]="data" [config]="configForBarChart">
+            </app-bar-chart-view>
+            <app-line-chart-view *ngIf="data && (chartId === 4)" [data]="data" [config]="configForLineChart">
+            </app-line-chart-view>
+            <app-pie-chart-view *ngIf="data && (chartId === 2)" [data]="data" [config]="configForPieChart">
+            </app-pie-chart-view>
         </div>
 
-
         <div *ngIf="instanceNamesAvl.length > 0 && (chartId === 4)" class="lineChartOptions">
-              <div *ngFor="let item of instanceNamesAvl">  <button (click)="onInstanceChange(item)" [ngClass]="{'activeBtn' : item === selectedLineChartOption }">
+            <div *ngFor="let item of instanceNamesAvl"> <button (click)="onInstanceChange(item)"
+                    [ngClass]="{'activeBtn' : item === selectedLineChartOption }">
                     {{item}}
                 </button>
-                </div>
             </div>
-
+        </div>
 
         <div *ngIf="false" class="chartBox">
-                <!-- <app-bar-chart-view *ngIf="isBarChartDataReady" [data]="data" [configForBarChart]="configForBarChart"></app-bar-chart-view>  -->
-                <app-bar-chart-view *ngIf="dataMEM" [data]="dataMEM" [config]="configForBarChart" ></app-bar-chart-view>
-            </div>
+            <app-bar-chart-view *ngIf="dataMEM" [data]="dataMEM" [config]="configForBarChart"></app-bar-chart-view>
+        </div>
+    </div>
 </div>
-</div>
-<!-- <div style="display: flex;">
-<div class="chartCPU">
-    <app-bar-chart-view  *ngIf="data" [data]="data" [config]="configForBarChart" ></app-bar-chart-view>
-</div>
-
-<div class="chartMEM">
-    <app-bar-chart-view  *ngIf="dataMEM" [data]="dataMEM" [config]="configForBarChart" ></app-bar-chart-view>
-</div>
-</div> -->
-
-<!-- <div class="check">
-    <app-bar-chart-view  *ngIf="data" [data]="data" [config]="configForBarChart" ></app-bar-chart-view>
-</div>
-
-<div class="check2">
-    <app-bar-chart-view  *ngIf="dataMEM" [data]="dataMEM" [config]="configForBarChart" ></app-bar-chart-view>
-</div> -->

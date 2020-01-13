@@ -10,10 +10,7 @@ import * as d3Time from 'd3-time-format';
 import * as d3Hierarchy from 'd3-hierarchy';
 import { HChartData } from 'src/app/shared/interfaces/interface';
 import { ChartService } from 'src/app/shared/services/chart.service';
-import {
-  sankey as d3Sankey,
-  sankeyLinkHorizontal
-} from 'd3-sankey';
+
 @Component({
   selector: 'app-heirachy-chart-view',
   templateUrl: './heirachy-chart-view.component.html',
@@ -37,7 +34,6 @@ export class HeirachyChartViewComponent implements OnInit, OnChanges {
     this.initSvgAndGraoh();
     this.dataManipulation();
     this.isInputDataAvailable = true;
-    // this.update(this.data);
   }
 
   private initSvgAndGraoh() {
@@ -74,7 +70,7 @@ export class HeirachyChartViewComponent implements OnInit, OnChanges {
   // get updated root Node data
   const rootNode = this.startify(data);
   const treeData = this.treeGen(rootNode).descendants();
-  
+
   // get nodes selection and join data
   const nodes = this.graph.selectAll('.node')
     .data(treeData);
@@ -82,8 +78,6 @@ export class HeirachyChartViewComponent implements OnInit, OnChanges {
   // get link selection and join new data
   const link = this.graph.selectAll('.link')
     .data(this.treeGen(rootNode).links());
-  
-    console.log(this.treeGen(rootNode).links())
 
   // enter new links
   link.enter()
@@ -101,7 +95,7 @@ export class HeirachyChartViewComponent implements OnInit, OnChanges {
     .append('g')
       .attr('class', 'node')
       .attr('transform', d => `translate(${d.x}, ${d.y})`);
-      
+
   // append rects to enter nodes
   enterNodes.append('rect')
     .attr('fill', d => this.color(d.data.department))

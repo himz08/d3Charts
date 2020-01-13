@@ -8,7 +8,6 @@ import { NgxUiLoaderService } from 'ngx-ui-loader'; // Import NgxUiLoaderService
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/shared/services/common.service';
 
-
 @Component({
   selector: 'app-bar-chart',
   templateUrl: './bar-chart.component.html',
@@ -22,12 +21,8 @@ export class BarChartComponent implements OnInit, OnDestroy {
   title = 'Bar Chart';
 
   private subscription: Subscription;
-  xAxisGroup: any;
   i = 0;
-  yAxisGroup: any;
-  inputText: string;
   inputForm: FormGroup;
-  inputValue: number;
   constructor(private chartService: ChartService,
               private ngxLoader: NgxUiLoaderService,
               private commonService: CommonService
@@ -38,19 +33,15 @@ export class BarChartComponent implements OnInit, OnDestroy {
     this.ngxLoader.start();
     this.subscription = this.chartService.getBarChartData().subscribe((res: any) => {
       this.ngxLoader.stop();
-      console.log('res-----', res);
-      // this.data = [];
-
       res.forEach(change => {
         const doc = { ...change.payload.doc.data(), id: change.payload.doc.id };
         this.checkTypeAndUpdateData(change, doc);
       });
       this.dataForChild = JSON.parse(JSON.stringify(this.data));
-      console.log('data for child', this.data);
+      // console.log('data for child', this.data);
 
     });
     this.chartService.emitPageId(2);
-
   }
   private initForm() {
     this.inputForm = new FormGroup({
@@ -64,16 +55,11 @@ export class BarChartComponent implements OnInit, OnDestroy {
     switch (change.type) {
 
       case 'added':
-        console.log('added');
         this.data.push(doc);
         break;
 
       case 'modified':
         const index = this.data.findIndex(item => item.id === doc.id);
-        console.log('Modified');
-        console.log(this.data);
-        console.log(doc);
-        console.log(change, index);
         this.data[index] = doc;
         break;
 
@@ -96,10 +82,7 @@ export class BarChartComponent implements OnInit, OnDestroy {
         this.commonService.openSnackBar('Added', 'ok');
         this.initForm();
       });
-      // this.erroMessage = '';
-    }
-    else {
-      // this.erroMessage = 'Please enter the values';
+
     }
   }
   ngOnDestroy() {

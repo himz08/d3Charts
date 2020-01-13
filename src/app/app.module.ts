@@ -44,7 +44,8 @@ import { ChartsViewModule } from './charts-view-module/charts-view.module';
     PieChartComponent,
     ConfirmationDialogComponent,
     DialogBoxComponent,
-    DruidDataComponent
+    DruidDataComponent,
+
   ],
   imports: [
     BrowserAnimationsModule,

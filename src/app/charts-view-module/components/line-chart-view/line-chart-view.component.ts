@@ -84,12 +84,8 @@ export class LineChartViewComponent implements OnInit, OnChanges {
     const height = this.graphHeight + this.margin.top + this.margin.bottom;
     document.querySelector('.canvas').innerHTML = '';
     this.svg = d3.select('.canvas')
-      // .append('div')
-      // .attr('style', 'width : inherit; height: inherit')
       .append('svg')
       .attr('viewBox', `0,0,${width},${height}`);
-      // .attr('width', )
-      // .attr('height', );
 
     this.graph = this.svg.append('g').attr('width', this.graphWidth)
       .attr('height', this.graphHeight)
@@ -104,20 +100,15 @@ export class LineChartViewComponent implements OnInit, OnChanges {
     this.xAxisGroup = this.graph
       .append('g')
       .attr('class', 'x-axis')
-      // .attr('stroke', `${this.config.axisColor}`)
-      // .attr('stroke-width', 1)
       .attr('transform', `translate(0,${this.graphHeight})`);
 
     this.yAxisGroup = this.graph
       .append('g')
-      // .attr('stroke', `${this.config.axisColor}`)
-      // .attr('stroke-width', 1)
       .attr('class', 'y-axis');
 
     this.line = d3Shape.line()
     .x((d: any) => this.x(new Date(d[this.config.xId])))
     .y((d: any) => this.y(d[this.config.yId]));
-
 
   }
 

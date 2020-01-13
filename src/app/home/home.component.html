@@ -14,16 +14,13 @@
                 <a mat-list-item [ngClass]="{'selectedTab' : pageId === 2}" (click)="navigate(2)"> Bar Chart</a>
                 <a mat-list-item [ngClass]="{'selectedTab' : pageId === 3}" (click)="navigate(3)"> Pie Chart</a>
                 <a mat-list-item [ngClass]="{'selectedTab' : pageId === 4}" (click)="navigate(4)"> Hieracrchy Chart</a>
-                <a mat-list-item  class="druidData"> Druid Data</a>
+                <a mat-list-item (click)="navigate(5)"  class="druidData"> Druid Data</a>
 
 
-          <!-- <a mat-list-item [ngClass]="{'activeClass' : nav.id == activeID  }" (click)="onSideNavItemClick(nav)" *ngFor="let nav of fillerNav">{{nav.displayName}}</a> -->
         </mat-nav-list>
       </mat-sidenav>
   
       <mat-sidenav-content>
-
-
         <router-outlet></router-outlet>
     </mat-sidenav-content>
     </mat-sidenav-container>

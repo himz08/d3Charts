@@ -36,7 +36,6 @@ export class BarChartViewComponent implements OnInit, OnChanges {
     onClickEnable: boolean
     hoverEnable: boolean;
     axisColor: string;
-
   } = {
       scaleType: 'scaleBand',
       xPoints: null,
@@ -47,7 +46,6 @@ export class BarChartViewComponent implements OnInit, OnChanges {
       onClickEnable: true,
       hoverEnable: false,
       axisColor: 'black'
-
     };
 
   @Input() data: any[] = [];
@@ -65,7 +63,6 @@ export class BarChartViewComponent implements OnInit, OnChanges {
   yAxisGroup: any;
 
   constructor(private chartService: ChartService,
-              private ngxLoader: NgxUiLoaderService,
               public dialog: MatDialog
   ) {
     this.graphWidth = this.width - this.margin.left - this.margin.right;
@@ -134,12 +131,9 @@ export class BarChartViewComponent implements OnInit, OnChanges {
     const endValue = d3Array.max(data, (d: any) => d[this.config.yId]);
     this.y.domain([startValue, endValue]);
 
-    console.warn(d3Array.max(data, (d: any) => d[this.config.yId]));
-
     // join data
     const rects = this.svg.selectAll('rect')
       .data(data);
-
 
     // remove unwanted
     rects.exit().remove();

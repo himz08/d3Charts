@@ -1,50 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DruidService } from './druid.service';
 import { DruidData } from '../shared/interfaces/interface';
+import { configForBarChart, configForLineChart, configForPieChart } from './druid.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-druid-data',
   templateUrl: './druid-data.component.html',
   styleUrls: ['./druid-data.component.scss']
 })
-export class DruidDataComponent implements OnInit {
+export class DruidDataComponent implements OnInit, OnDestroy {
 
   constructor(private service: DruidService) { }
-  configForBarChart = {
-    scaleType: 'scaleBand',
-    xPoints: null,
-    yPoints: null,
-    yUnitName: '%  ',
-    xId: 'instance_name',
-    yId: 'average',
-    onClickEnable : false,
-    hoverEnable : true,
-    axisColor: '#ccc'
-  };
-
-  configForLineChart = {
-    scaleType: 'scaleTime',
-    xPoints: null,
-    yPoints: null,
-    yUnitName: 'Orders',
-    xId: 'timestamp',
-    yId: 'average',
-    onClickEnable: false,
-    hoverEnable: true,
-    axisColor: '#ccc',
-    dateTimeRepXaxis: '%c'
-  };
+  private configForBarChart;
+  private configForLineChart;
+  private configForPieChart;
 
   data: DruidData[] = [];
   rawData: DruidData[] = [];
   sourceId = 1;
   chartId = 1;
+  chartBoxHeight = 600;
   isBarChartDataReady: boolean;
   public instanceNamesAvl: string[] = [];
   public  selectedLineChartOption: string;
+  public currentSubscription: Subscription;
 
   ngOnInit() {
+    this.setConfig();
     this.onSourceChange(1);
+
+    const pollingObservable = Observable.create((observer: any) => {
+      setInterval(() => {
+        observer.next();
+      }, 10000);
+    });
+
+    this.currentSubscription = pollingObservable.subscribe(res => {
+      this.onSourceChange(this.sourceId);
+    })
+  }
+
+  setConfig() {
+    this.configForBarChart = configForBarChart;
+    this.configForLineChart = configForLineChart;
+    this.configForPieChart = configForPieChart;
   }
 
 
@@ -52,7 +52,8 @@ export class DruidDataComponent implements OnInit {
 
   onSourceChange(id: number) {
     this.sourceId = id;
-    if (this.chartId === 1) {
+    if (this.chartId === 1) { // Bar Chart
+      this.chartBoxHeight = 600;
       if (id === 1) {
         this.service.getDruidData('allCPU').subscribe((res: any) => {
           res.forEach(el => {
@@ -73,7 +74,8 @@ export class DruidDataComponent implements OnInit {
         this.data = res;
       });
       }
-    } else if (this.chartId === 4) {
+    } else if (this.chartId === 4) { // Line Chart
+      this.chartBoxHeight = 450;
       if (id === 1) {
         this.service.getDruidData('minCPU').subscribe((res: any) => {
           res.forEach(el => {
@@ -97,6 +99,19 @@ export class DruidDataComponent implements OnInit {
         console.log('...', res);
         this.rawData = res;
         this.data = res.filter(item => item.instance_name === this.selectedLineChartOption);
+      });
+      }
+    } else if (this.chartId === 2) { // Pie Chart
+      this.chartBoxHeight = 450;
+      if (id === 1) {
+        this.service.getDruidData('minCPU').subscribe((res: any) => {
+          this.createDataForPieChart(res);
+          this.rawData = res;
+        });
+      } else if (id === 2) {
+        this.service.getDruidData('minMEM').subscribe((res: any) => {
+          this.createDataForPieChart(res);
+          this.rawData = res;
       });
       }
     }
@@ -124,10 +139,27 @@ export class DruidDataComponent implements OnInit {
     console.log('::::::::::>>', instanceNamesAvl);
   }
 
+  createDataForPieChart(res: DruidData[]) {
+    const pieData: DruidData[] = [];
+    res.forEach(el => {
+     const i = pieData.findIndex(item => item.instance_name === el.event.instance_name);
+     if (i === -1) {
+      el.instance_name = el.event.instance_name;
+      el.average = el.event.average;
+      pieData.push(el);
+     } else {
+       pieData[i].average += el.event.average;
+     }
+  });
+    this.data = pieData;
+}
+
   onInstanceChange(name: string) {
     this.selectedLineChartOption = name;
     this.data = this.rawData.filter(item => item.instance_name === name);
   }
 
-
+  ngOnDestroy() {
+    this.currentSubscription.unsubscribe();
+  }
 }

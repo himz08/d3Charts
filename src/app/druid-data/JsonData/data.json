@@ -192,7 +192,7 @@
             "project_uuid": "7a6db2b2-a584-4429-b14e-2abd265c38ca",
             "other_details": null,
             "average": 0.0,
-            "total": 1,
+            "total": 1.5,
             "instance_name": "centos_001",
             "metric_type": "cpu",
             "instance_uuid": "0c06b18c-04a8-4dde-bf5e-f94ae4e248ee",

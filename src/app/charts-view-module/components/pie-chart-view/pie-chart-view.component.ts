@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 // D3 dependencies
 import * as d3 from 'd3';
@@ -10,7 +10,6 @@ import { ConfirmationDialogComponent } from '../../../shared/components/confirma
 import { MatDialog } from '@angular/material';
 import { ChartService } from 'src/app/shared/services/chart.service';
 import { legendColor } from 'd3-svg-legend';
-
 
 
 @Component({
@@ -32,6 +31,22 @@ export class PieChartViewComponent implements OnInit, OnChanges {
   legend: any;
   tip: any;
 
+  @Input() config: {
+
+    optionName: string; // xLabel
+    valueName: string; // yLabel
+    onClickEnable: boolean
+    hoverEnable: boolean;
+    legendColor: string
+
+  } = {
+      optionName: 'name',
+      valueName: 'cost',
+      onClickEnable: true,
+      hoverEnable: false,
+      legendColor: 'black'
+    };
+
   constructor(public dialog: MatDialog, private chartService: ChartService) { }
 
   ngOnInit() {
@@ -41,13 +56,11 @@ export class PieChartViewComponent implements OnInit, OnChanges {
       .innerRadius(this.dims.radius / 2);
 
     this.colour = d3Scale.scaleOrdinal(d3['schemeSet3']);
-
+    // this.colour = d3Scale.scaleOrdinal().range(['red','black','green','pink','blue']);
 
     this.isInputDataAvailable = true;
-    console.log('------->', this.data);
     this.update(this.data);
     this.chartService.emitPageId(3);
-
   }
 
   private initSvgAndPie() {
@@ -56,24 +69,26 @@ export class PieChartViewComponent implements OnInit, OnChanges {
     this.svg = d3.select('.canvas')
       .append('svg')
       // .attr('viewBox', `0,0,${width},${height}`)
-      .attr('width', this.dims.width + 150)
-      .attr('height', this.dims.height + 150)
+      .attr('width', width)
+      .attr('height', height)
       .append('g')
       .attr('transform', `translate(${this.cent.x}, ${this.cent.y})`);
 
     this.pie = d3Shape.pie()
       .sort(null)
-      .value((d: any) => d.cost);
+      .value((d: any) => d[this.config.valueName]);
+
 
     this.legendGroup = this.svg.append('g')
-      .attr('transform', `translate(${this.cent.x + 15}, -80)`);
+      .attr('transform', `translate(${this.cent.x + 15}, -80)`)
+      .attr('fill', this.config.legendColor );
 
     this.legend = legendColor().shape('circle');
     this.tip = d3Tip()
       .attr('class', 'tip card')
       .html(d => {
-        let content = `<div style="border-radius:8px; padding: 2px; background: white; z-index: 1000; border: solid 1px;" class="tip-container"> <div class="name">${d.data.name}</div>`;
-        content += `<div class="cost">£${d.data.cost}</div>`;
+        let content = `<div style="border-radius:8px; padding: 2px; background: white; z-index: 1000; border: solid 1px;" class="tip-container"> <div class="name">${d.data[this.config.optionName]}</div>`;
+        content += `<div class="cost">${this.config.valueName} : ${d.data[this.config.valueName]}</div>`;
         content += `<div class="delete">Click slice to delete</div> </div>`;
         return content;
       });
@@ -82,14 +97,26 @@ export class PieChartViewComponent implements OnInit, OnChanges {
 
   private update(data) {
     // update colour scale domain
-    this.colour.domain(data.map(d => d.name));
+    this.colour.domain(data.map(d => d[this.config.optionName]));
 
     // update legend
     this.legend.scale(this.colour);
     this.legendGroup.call(this.legend);
+
     // join enhanced (pie) data to path elements
+    const pieChartData = this.pie(data);
+    console.log('paths', pieChartData);
+
+    pieChartData.forEach(el => {
+      el.startAngle += Math.PI;
+      el.endAngle += Math.PI;
+    });
+
     const paths = this.svg.selectAll('path')
-      .data(this.pie(data));
+      .data(pieChartData);
+
+    console.log('paths', pieChartData);
+
     // handle the exit selection
     paths.exit().remove();
     // handle the current DOM path updates
@@ -100,7 +127,7 @@ export class PieChartViewComponent implements OnInit, OnChanges {
       // .attr('d', this.arcGenerator)
       .attr('stroke', '#fff')
       .attr('stroke-width', 3)
-      .attr('fill', d => this.colour(d.data.name))
+      .attr('fill', d => this.colour(d.data[this.config.optionName]))
       // .transition().duration(750).attrTween('d', this.arcTweenEnter);
       .transition().duration(750).attr('d', this.arcGenerator);
 
@@ -113,8 +140,6 @@ export class PieChartViewComponent implements OnInit, OnChanges {
       })
       .on('mouseout', (d, i, n) => this.handleMouseOut(d, i, n))
       .on('click', (d, i, n) => this.handleClickEvent(d, i, n));
-
-
   }
 
   //    arcTweenEnter = (d) => {
@@ -144,7 +169,7 @@ export class PieChartViewComponent implements OnInit, OnChanges {
     d3.select(n[i])
       .transition('changeSliceFill').duration(300)
       .attr('transform', 'scale(1)')
-      .attr('fill', this.colour(d.data.name));
+      .attr('fill', this.colour(d.data[this.config.optionName]));
   }
 
   private handleClickEvent(d, i, n) {
